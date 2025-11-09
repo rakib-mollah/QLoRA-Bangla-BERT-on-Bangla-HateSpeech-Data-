@@ -1,4 +1,4 @@
-# LoRA-BanglaBERT Hate Speech Detection Fine-Tuning
+# QLoRA-BanglaBERT Hate Speech Detection Fine-Tuning
 
 ![BanglaBERT Logo](https://img.shields.io/badge/Model-BanglaBERT-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Python](https://img.shields.io/badge/Python-3.8%2B-yellow)
 
