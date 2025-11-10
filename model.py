@@ -10,8 +10,11 @@ class TransformerBinaryClassifier(nn.Module):
     """
     Transformer-based binary classifier for hate speech detection with LoRA support.
     """
+    # def __init__(self, model_name, dropout=0.1, use_lora=False, 
+    #              lora_r=8, lora_alpha=16, lora_dropout=0.05):
     def __init__(self, model_name, dropout=0.1, use_lora=False, 
-                 lora_r=8, lora_alpha=16, lora_dropout=0.05):
+                 lora_r=8, lora_alpha=16, lora_dropout=0.05,
+                 use_quantization=False, quant_type='4bit'): # <-- ADD THESE ARGS
         """
         Initialize the binary classifier.
         
