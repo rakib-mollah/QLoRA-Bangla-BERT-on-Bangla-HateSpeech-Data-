@@ -55,8 +55,12 @@ def parse_arguments():
                        help='Maximum norm for gradient clipping.')
     parser.add_argument('--early_stopping_patience', type=int, default=5,
                        help='Number of epochs without improvement before early stopping.')
-    # parser.add_argument('--use_lora', type=bool, default=True,
-    #                 help='Whether to use LoRA for fine-tuning.')
+# --- ADD QUANTIZATION ARGS ---
+    parser.add_argument('--use_quantization', action='store_true',
+                        help='Enable 4-bit or 8-bit quantization (QLoRA if used with --use_lora).')
+    parser.add_argument('--quant_type', type=str, default='4bit', choices=['4bit', '8bit'],
+                        help='Type of quantization to use.')
+    # --- END OF ADDITION ---
     parser.add_argument('--use_lora', type=str, default='True',help='Whether to use LoRA for fine-tuning (True/False).')
     parser.add_argument('--lora_r', type=int, default=8,
                         help='LoRA rank (lower = fewer params, try 4-16).')
@@ -105,10 +109,16 @@ def print_config(config):
     print(f"  Max Sequence Length: {config.max_length}")
     print(f"  Freeze Base: {config.freeze_base}")
     print(f"  Dropout: {config.dropout}")
+# --- ADD QUANTIZATION PRINTS ---
+    print(f"  Use Quantization: {config.use_quantization}")
+    if config.use_quantization:
+        print(f"  Quantization Type: {config.quant_type}")
+    # --- END OF ADDITION ---
     print(f"  Use LoRA: {config.use_lora}")
-    print(f"  LoRA Rank: {config.lora_r}")
-    print(f"  LoRA Alpha: {config.lora_alpha}")
-    print(f"  LoRA Dropout: {config.lora_dropout}")
+    if config.use_lora:
+        print(f"  LoRA Rank: {config.lora_r}")
+        print(f"  LoRA Alpha: {config.lora_alpha}")
+        print(f"  LoRA Dropout: {config.lora_dropout}")
 
     print("\nOptimizer Parameters:")
     print(f"  Weight Decay: {config.weight_decay}")
